@@ -128,4 +128,27 @@ public class TCPServerTest
 		}
 		
 	}
+
+	@Test
+	public void testRun()
+	{
+		try
+		{
+			//テスト用のソケットの生成
+			TCPServer t = new TCPServer();
+			TestSocket ts = new TestSocket(MsgText);
+			//run()の実行
+			t.run(ts);
+			//結果の取得
+			String outputstring = ts.getOutputStream().toString();
+			if(!outputstring.equals("正しい結果"))
+			{
+				fail();
+			}
+
+		} catch (Exception e)
+		{
+			fail();
+		}
+	}
 }
