@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -134,14 +135,18 @@ public class TCPServerTest
 	{
 		try
 		{
+			//TCPServerの生成(MessageProcedureはテスト用を指定)
+			TCPServer t = new TCPServer(new TestMessageProcedure());
 			//テスト用のソケットの生成
-			TCPServer t = new TCPServer();
 			TestSocket ts = new TestSocket(MsgText);
 			//run()の実行
 			t.run(ts);
 			//結果の取得
-			String outputstring = ts.getOutputStream().toString();
-			if(!outputstring.equals("正しい結果"))
+			String outputstring =((ByteArrayOutputStream) ts.getOutputStream()).toString("UTF-8");
+			//結果の標準出力への出力
+			//System.out.println(outputstring);
+			//結果が想定と同じか確認
+			if(!outputstring.equals("MESSAGE_1.0\nOK\n\n"))
 			{
 				fail();
 			}
