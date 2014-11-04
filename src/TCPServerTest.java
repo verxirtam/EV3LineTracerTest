@@ -156,4 +156,27 @@ public class TCPServerTest
 			fail();
 		}
 	}
+	//MessageのVersionが不正な場合は例外が発生することを確認する
+	@Test
+	public void testRunException()
+	{
+		try
+		{
+			//TCPServerの生成(MessageProcedureはテスト用を指定)
+			TCPServer t = new TCPServer(new TestMessageProcedure());
+			String InvalidMessage="InvalidMessage\n"
+								 +"TESTTEST\n"
+								 +"\n";
+			//テスト用のソケットの生成
+			TestSocket ts = new TestSocket(InvalidMessage);
+			//run()の実行→MessageのVersionが不正なため例外発生
+			t.run(ts);
+			//例外が発生しなければ失敗
+			fail();
+			
+		} catch (Exception e)
+		{
+			assertTrue(true);
+		}
+	}
 }
