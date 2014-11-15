@@ -11,10 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rl.StochasticPolicy;
-import rl.linetracer.CommandExecEpisode;
-import rl.linetracer.CommandSetMDP;
-import rl.linetracer.CommandSetPolicy;
 import rl.linetracer.EV3LineTracer;
+import rl.linetracer.communication.old.CommandExecEpisode;
+import rl.linetracer.communication.old.CommandSetMDP;
+import rl.linetracer.communication.old.CommandSetPolicy;
 
 public class CommandTest
 {

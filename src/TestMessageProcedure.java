@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-import rl.communication.MessageProcedure;
+import rl.communication.old.MessageProcedure;
 
 
 public class TestMessageProcedure extends MessageProcedure

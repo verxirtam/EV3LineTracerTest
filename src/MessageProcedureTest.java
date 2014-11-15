@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import rl.communication.Command;
-import rl.communication.MessageProcedure;
-import rl.linetracer.CommandExecEpisode;
-import rl.linetracer.CommandSetMDP;
-import rl.linetracer.CommandSetPolicy;
+import rl.communication.old.Command;
+import rl.communication.old.MessageProcedure;
+import rl.linetracer.communication.old.CommandExecEpisode;
+import rl.linetracer.communication.old.CommandSetMDP;
+import rl.linetracer.communication.old.CommandSetPolicy;
 
 
 public class MessageProcedureTest
