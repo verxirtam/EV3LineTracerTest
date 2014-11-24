@@ -1,7 +1,11 @@
+package rl.communication.message;
+
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -9,12 +13,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-// TODO oldのクラスのimportを正式版に改める
-import rl.communication.old.Command;
-import rl.communication.old.MessageProcedure;
-import rl.linetracer.communication.old.CommandExecEpisode;
-import rl.linetracer.communication.old.CommandSetMDP;
-import rl.linetracer.communication.old.CommandSetPolicy;
+import rl.communication.message.context.MessageInputContext;
+import rl.communication.message.context.MessageOutputContext;
+import rl.communication.message.context.TSVInputContext;
+import rl.communication.message.context.TSVOutputContext;
+import rl.linetracer.EV3LineTracer;
 
 
 public class MessageProcedureTest
@@ -27,7 +30,8 @@ public class MessageProcedureTest
 	{
 		//SetMDP用body
 		SetMDPBody
-			="EV3LineTracer_1.0\n"
+			="MESSAGE_1.0\n"
+			+"EV3LineTracer_1.0\n"
 			+"SetMDP\n"
 			+"11"+"\n"
 			+"10"+"\n"
@@ -69,7 +73,8 @@ public class MessageProcedureTest
 			+"6	1"+"\n"
 			+"7	0"+"\n"
 			+"8	1"+"\n"
-			+"9	1";
+			+"9	1"+"\n"
+			+""	  +"\n";
 
 		SetPolicyBody
 			="EV3LineTracer_1.0\n"
@@ -92,7 +97,7 @@ public class MessageProcedureTest
 	{
 	}
 
-
+/*
 	@Test
 	public void testMessageProcess()
 	{
@@ -197,6 +202,56 @@ public class MessageProcedureTest
 			e.printStackTrace();
 			fail();
 		}
+	}
+	*/
+	
+	@Test
+	public void testMessage()
+	{
+		Reader sr= new StringReader(SetMDPBody);
+		BufferedReader br = new BufferedReader(sr);
+		
+		BufferedWriter bw=new BufferedWriter(new StringWriter());
+
+		try
+		{
+			MessageInputContext mic = new TSVInputContext(br);
+			
+			MessageOutputContext moc = new TSVOutputContext(bw);
+			
+			Message m = new Message();
+			m.process(mic, moc);
+			
+			EV3LineTracer ev3 = EV3LineTracer.getInstance();
+			assertEquals(ev3.GetInterval(),11);
+			assertEquals(ev3.GetStateCount(),10);
+			assertEquals(ev3.GetControlCount(0),1);
+			assertEquals(ev3.GetControlCount(1),2);
+			assertEquals(ev3.GetControlCount(2),2);
+			assertEquals(ev3.GetControlCount(3),2);
+			assertEquals(ev3.GetControlCount(4),2);
+			assertEquals(ev3.GetControlCount(5),2);
+			assertEquals(ev3.GetControlCount(6),2);
+			assertEquals(ev3.GetControlCount(7),2);
+			assertEquals(ev3.GetControlCount(8),2);
+			assertEquals(ev3.GetControlCount(9),2);
+			// TODO Controlのテストを作る
+			// TODO RegularPolicyのテストを作る
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			fail();
+		}
+		finally
+		{
+			try{br.close();} catch (IOException e){}
+			try{sr.close();} catch (IOException e){}
+			try{bw.close();} catch (IOException e){}
+		}
+		
+		
+		
 	}
 
 }
