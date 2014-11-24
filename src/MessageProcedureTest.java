@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO oldのクラスのimportを正式版に改める
 import rl.communication.old.Command;
 import rl.communication.old.MessageProcedure;
 import rl.linetracer.communication.old.CommandExecEpisode;
