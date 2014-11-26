@@ -3,21 +3,12 @@ package rl.communication.message;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
-import java.io.StringWriter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import rl.communication.message.context.MessageInputContext;
-import rl.communication.message.context.MessageOutputContext;
-import rl.communication.message.context.TSVInputContext;
-import rl.communication.message.context.TSVOutputContext;
-
 
 public class MessageTest
 {
@@ -25,83 +16,28 @@ public class MessageTest
 	private String InvalidMessageVersionMessage;
 	private String NoBlankLineMessage;
 	
-	private MessageInputContext mic;
-	private MessageOutputContext moc;
-	
-	private Reader sr;
-	private BufferedReader br;
-	private StringWriter sw;
-	private BufferedWriter bw;
 
 
 	@Before
 	public void setUp() throws Exception
 	{
-		String MessageVersion="MESSAGE_1.0\n";
-		String EV3Version = "EV3LineTracer_1.0\n";
-		String BlankLine = "\n";
-		
-		String Command = "SetMDP\n"
-			+"11"+"\n"
-			+"10"+"\n"
-			+"0	0.1	1"+"\n"
-			+"1	0.2	2"+"\n"
-			+"2	0.3	2"+"\n"
-			+"3	0.4	2"+"\n"
-			+"4	0.5	2"+"\n"
-			+"5	0.6	2"+"\n"
-			+"6	0.7	2"+"\n"
-			+"7	0.8	2"+"\n"
-			+"8	0.9	2"+"\n"
-			+"9	1.0	2"+"\n"
-			+"0	0	10	10"+"\n"
-			+"1	0	10	5"+"\n"
-			+"1	1	5	10"+"\n"
-			+"2	0	10	5"+"\n"
-			+"2	1	5	10"+"\n"
-			+"3	0	10	5"+"\n"
-			+"3	1	5	10"+"\n"
-			+"4	0	10	5"+"\n"
-			+"4	1	5	10"+"\n"
-			+"5	0	10	5"+"\n"
-			+"5	1	5	10"+"\n"
-			+"6	0	10	5"+"\n"
-			+"6	1	5	10"+"\n"
-			+"7	0	10	5"+"\n"
-			+"7	1	5	10"+"\n"
-			+"8	0	10	5"+"\n"
-			+"8	1	5	10"+"\n"
-			+"9	0	10	5"+"\n"
-			+"9	1	5	10"+"\n"
-			+"0	0"+"\n"
-			+"1	1"+"\n"
-			+"2	1"+"\n"
-			+"3	0"+"\n"
-			+"4	0"+"\n"
-			+"5	1"+"\n"
-			+"6	1"+"\n"
-			+"7	0"+"\n"
-			+"8	1"+"\n"
-			+"9	1"+"\n";
 
-		
+		//正常なメッセージ(正常系向け)
 		NormalMessage
-			=MessageVersion
-			+EV3Version
-			+Command
-			+BlankLine;
+			=TestMessage.NormalMessageSetMDP;
 		
+		//MessageVersionが不正なメッセージ
 		InvalidMessageVersionMessage
-		="AAAAAAAAAAAA\n"
-		+EV3Version
-		+Command
-		+BlankLine;
+		="AAAAAAAAAAAA\n"				//MessageVersionが不正
+		+TestMessage.EV3Version
+		+TestMessage.CommandSetMDP
+		+TestMessage.BlankLine;
 	
-		
+		//メッセージ末尾の改行がないメッセージ
 		NoBlankLineMessage
-		=MessageVersion
-		+EV3Version
-		+Command;
+		=TestMessage.MessageVersion
+		+TestMessage.EV3Version
+		+TestMessage.CommandSetMDP;
 		
 		
 	}
@@ -111,79 +47,69 @@ public class MessageTest
 	{
 	}
 	
-	private void setUpContext(String message)
-	{
-		sr= new StringReader(message);
-		br = new BufferedReader(sr);
-		sw = new StringWriter();
-		bw = new BufferedWriter(sw);
-
-		try
-		{
-			mic = new TSVInputContext(br);
-			moc = new TSVOutputContext(bw);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	private void closeContext()
-	{
-		try{br.close();} catch (IOException e){}
-		try{sr.close();} catch (IOException e){}
-		try{bw.close();} catch (IOException e){}
-	}
-	
 	//正常系
 	@Test
 	public void testMessage()
 	{
-		setUpContext(NormalMessage);
-		
+		TestMessageContext tmc = null;
 		BufferedReader r = null;
 		
 		try
 		{
+			tmc = new TestMessageContext(NormalMessage);
+
 			
 			Message m = new Message();
-			m.process(mic, moc);
+			m.process(tmc.getMessageInputContext(), tmc.getMessageOutputContext());
 			
 			//ここではclass Messageのテストのみ行うので
 			//例外が発生しないことと出力の末尾に空行があることのみ検証する
 			
 			//出力結果の読み取り用バッファ
-			r = new BufferedReader(new StringReader(sw.toString()));
+			r = new BufferedReader(new StringReader(tmc.getStringWriter().toString()));
 			
-			String previousLine = null;
+			//末尾の行を取得する
+			//バッファの１行
 			String line;
+			//lineの直前の行
+			String previousLine = null;
+			//バッファの最後の行を取得する
 			while((line=r.readLine())!=null)
 			{
 				previousLine = line;
 			}
 			if(previousLine!=null)
 			{
+				//バッファに１行以上ある場合
 				if(previousLine.equals(""))
 				{
+					//最後の行が空行の場合は成功
 					assertTrue(true);
 				}
 				else
 				{
+					//最後の行が空行でない場合は失敗
 					fail();
 				}
+			}
+			else
+			{
+				//バッファに一行もない場合は失敗
+				fail();
 			}
 		}
 		catch(Exception e)
 		{
+			//例外が発生したら失敗
 			e.printStackTrace();
 			fail();
 		}
 		finally
 		{
 			try{r.close();}catch(IOException e){}
+			tmc.close();
 		}
 		
-		closeContext();
 		
 	}
 	//異常系(メッセージバージョンの不正)
@@ -192,12 +118,15 @@ public class MessageTest
 	{
 		//ここではclass Messageのテストのみ行う
 		//例外が発生することを検証する
-
-		setUpContext(InvalidMessageVersionMessage);
+		
+		TestMessageContext tmc = null;
+		
 		try
 		{
+			tmc = new TestMessageContext(InvalidMessageVersionMessage);
+
 			Message m = new Message();
-			m.process(mic, moc);
+			m.process(tmc.getMessageInputContext(), tmc.getMessageOutputContext());
 			
 			//例外が発生しなければ失敗
 			fail();
@@ -208,8 +137,12 @@ public class MessageTest
 			e.printStackTrace();
 			assertTrue(true);
 		}
+		finally
+		{
+			tmc.close();
+		}
 		
-		closeContext();
+		
 		
 	}
 	//異常系(メッセージ末尾の空行無し)
@@ -219,12 +152,14 @@ public class MessageTest
 		//ここではclass Messageのテストのみ行う
 		//例外が発生することを検証する
 
-		setUpContext(NoBlankLineMessage);
+		TestMessageContext tmc = null;
+		
 		try
 		{
+			tmc = new TestMessageContext(NoBlankLineMessage);
 			
 			Message m = new Message();
-			m.process(mic, moc);
+			m.process(tmc.getMessageInputContext(), tmc.getMessageOutputContext());
 			
 			//例外が発生しなければ失敗
 			fail();
@@ -235,8 +170,11 @@ public class MessageTest
 			e.printStackTrace();
 			assertTrue(true);
 		}
+		finally
+		{
+			tmc.close();
+		}
 		
-		closeContext();
 		
 
 	}
