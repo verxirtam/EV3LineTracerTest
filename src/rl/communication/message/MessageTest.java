@@ -24,20 +24,20 @@ public class MessageTest
 
 		//正常なメッセージ(正常系向け)
 		NormalMessage
-			=TestMessage.NormalMessageSetMDP;
+			=TestMessage.NormalMessageNullCommand;
 		
 		//MessageVersionが不正なメッセージ
 		InvalidMessageVersionMessage
 		="AAAAAAAAAAAA\n"				//MessageVersionが不正
 		+TestMessage.EV3Version
-		+TestMessage.CommandSetMDP
+		+TestMessage.CommandNullCommand
 		+TestMessage.BlankLine;
 	
 		//メッセージ末尾の改行がないメッセージ
 		NoBlankLineMessage
 		=TestMessage.MessageVersion
 		+TestMessage.EV3Version
-		+TestMessage.CommandSetMDP;
+		+TestMessage.CommandNullCommand;
 		
 		
 	}

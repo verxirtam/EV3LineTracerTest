@@ -49,6 +49,9 @@ public class TestMessage
 		+"7	0"+"\n"
 		+"8	1"+"\n"
 		+"9	1"+"\n";
+	
+	//コマンド(NullCommand)
+	public static String CommandNullCommand = "NullCommand\n";
 
 	//空行
 	public static String BlankLine = "\n";
@@ -59,4 +62,12 @@ public class TestMessage
 			+TestMessage.EV3Version
 			+TestMessage.CommandSetMDP
 			+TestMessage.BlankLine;
+	
+	//通常のメッセージ(NullCommand)
+	public static String NormalMessageNullCommand
+		=TestMessage.MessageVersion
+			+TestMessage.EV3Version
+			+TestMessage.CommandNullCommand
+			+TestMessage.BlankLine;
+		
 }
