@@ -14,7 +14,7 @@ import org.junit.Test;
 import rl.communication.TCPServer;
 
 
-//TODO コメントを書くこと
+//Interpreterパターンに則った方法に切り替えるためこのファイルの内容は全面的に書き換えられる
 
 public class TCPServerTest
 {
@@ -25,12 +25,14 @@ public class TCPServerTest
 	@Before
 	public void setUp() throws Exception
 	{
+		//テスト用メッセージ
 		MsgBody = "TESTTEST\n"
 				+"TESTTEST\n"
 				+"TESTTEST\n"
 				+"TESTTEST\n"
 				+"TESTTEST\n";
-
+		
+		//テスト用メッセージ全体
 		MsgText = "MESSAGE_1.0\n"
 				+MsgBody
 				+"\n";

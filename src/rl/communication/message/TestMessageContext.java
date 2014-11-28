@@ -22,7 +22,7 @@ public class TestMessageContext
 	private MessageInputContext mic;
 	private MessageOutputContext moc;
 
-	TestMessageContext(String message) throws IOException
+	public TestMessageContext(String message) throws IOException
 	{
 		sr= new StringReader(message);
 		br = new BufferedReader(sr);

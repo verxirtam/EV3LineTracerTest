@@ -49,6 +49,9 @@ public class TestMessage
 		+"7	0"+"\n"
 		+"8	1"+"\n"
 		+"9	1"+"\n";
+
+	//コマンド(ExecEpisode)
+	public static String CommandExecEpisode = "ExecEpisode\n";
 	
 	//コマンド(NullCommand)
 	public static String CommandNullCommand = "NullCommand\n";
