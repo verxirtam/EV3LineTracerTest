@@ -15,12 +15,11 @@ import rl.communication.message.context.MessageOutputContext;
 
 public class EV3LineTracer_1_0_CommandTest
 {
-	
-	
+
 	@Before
 	public void setUp() throws Exception
 	{
-		
+
 	}
 
 	@After
@@ -31,51 +30,54 @@ public class EV3LineTracer_1_0_CommandTest
 	@Test
 	public final void testProcess()
 	{
-		
+
 	}
 
-	//正常系(NullCommand)
-	@Test
-	public final void testCreateCommand_NullCommand()
+	private void testCreateCommand(String input_string,
+			String normal_output_string)
 	{
 		TestMessageContext tmc = null;
 		try
 		{
-			//MessageContextの準備
-			tmc = new TestMessageContext(TestMessage.CommandNullCommand);
+			// MessageContextの準備
+			tmc = new TestMessageContext(input_string);
 			MessageInputContext input = tmc.getMessageInputContext();
 			MessageOutputContext output = tmc.getMessageOutputContext();
-			
-			//処理の実行
+
+			// 処理の実行
 			EV3LineTracer_1_0_Command m = new EV3LineTracer_1_0_Command();
 			m.process(input, output);
-			
-			//出力結果の取得
+
+			// 出力結果の取得
+			output.flush();
 			StringWriter sw = tmc.getStringWriter();
-			sw.flush();
 			String output_string = sw.toString();
-			
-			//想定される出力結果
-			String normal_output_string = "NullCommand\nOK\n";
-			
-			//出力結果が想定通りかチェック
-			if(output_string.equals(normal_output_string))
+
+			// 出力結果が想定通りかチェック
+			if (output_string.equals(normal_output_string))
 			{
-				//想定通りなら成功
+				// 想定通りなら成功
 				assertTrue(true);
-			}
-			else
+			} else
 			{
-				//想定通りでないなら失敗
+				// 想定通りでないなら失敗
 				fail();
 			}
-		}
-		catch(Exception e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
-			//例外が発生したら失敗
+			// 例外が発生したら失敗
 			fail();
 		}
 	}
 
+	// 正常系(NullCommand)
+	@Test
+	public final void testCreateCommand_NullCommand()
+	{
+
+		String normal_output_string = CommandNullCommand.COMMAND_STRING
+				+ "\nOK\n";
+		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string);
+	}
 }
