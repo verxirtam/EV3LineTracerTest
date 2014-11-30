@@ -80,4 +80,13 @@ public class EV3LineTracer_1_0_CommandTest
 				+ "\nOK\n";
 		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string);
 	}
+	// 正常系(ExecEpisode)
+	@Test
+	public final void testCreateCommand_ExecEpisode()
+	{
+
+		String normal_output_string = CommandNullCommand.COMMAND_STRING
+				+ "\nOK\n";
+		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string);
+	}
 }

@@ -24,6 +24,33 @@ public class EpisodeTest
 		
 	}
 	@Test
+	public void testCopyConstructor()
+	{
+		Episode e=new Episode();
+		Step step=new Step(1,2,3.0);
+		e.AddStep(step);
+		step=new Step(4,5,6.0);
+		e.AddStep(step);
+		step=new Step(7,8,9.0);
+		e.AddStep(step);
+		
+		//コピーコンストラクタの実行
+		Episode e1 = new Episode(e);
+		
+		int step_count = e.GetStepCount();
+		for(int i = 0; i < step_count; i++)
+		{
+			assertEquals(e.GetStep(i).State, e1.GetStep(i).State);
+			assertEquals(e.GetStep(i).Control, e1.GetStep(i).Control);
+			assertEquals(e.GetStep(i).Cost, e1.GetStep(i).Cost,0.0625);
+		}
+		e.GetStep(0).State=10;
+		assertNotEquals(e.GetStep(0).State, e1.GetStep(0).State);
+		
+	}
+	
+	
+	@Test
 	public void testAddStep()
 	{
 		int stepcount=100;

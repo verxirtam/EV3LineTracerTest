@@ -1,13 +1,18 @@
 package rl.communication.message;
 
+import rl.linetracer.communication.EV3LineTracer_1_0_Command;
+
 public class TestMessage
 {
 	//メッセージバージョン
-	public static String MessageVersion="MESSAGE_1.0\n";
+	public static final String MessageVersion=
+			Message_1_0_Body.VERSION_STRING+"\n";
 	//EV3のバージョン
-	public static String EV3Version = "EV3LineTracer_1.0\n";
+	public static final String EV3Version = 
+			EV3LineTracer_1_0_Command.VERSION_STRING + "\n";
 	//コマンド(SetMDP)
-	public static String CommandSetMDP = "SetMDP\n"
+	public static final String CommandSetMDP =
+			rl.linetracer.communication.CommandSetMDP.COMMAND_STRING + "\n"
 		+"11"+"\n"
 		+"10"+"\n"
 		+"0	0.1	1"+"\n"
@@ -50,24 +55,28 @@ public class TestMessage
 		+"8	1"+"\n"
 		+"9	1"+"\n";
 
-	//コマンド(ExecEpisode)
-	public static String CommandExecEpisode = "ExecEpisode\n";
-	
-	//コマンド(NullCommand)
-	public static String CommandNullCommand = "NullCommand\n";
+	// コマンド(ExecEpisode)
+	public static final String CommandExecEpisode = 
+			rl.linetracer.communication.CommandExecEpisode.COMMAND_STRING
+			+ "\n";
+
+	// コマンド(NullCommand)
+	public static final String CommandNullCommand = 
+			rl.linetracer.communication.CommandNullCommand.COMMAND_STRING
+			+ "\n";
 
 	//空行
-	public static String BlankLine = "\n";
+	public static final String BlankLine = "\n";
 
 	//通常のメッセージ(SetMDP)
-	public static String NormalMessageSetMDP
+	public static final String NormalMessageSetMDP
 		=TestMessage.MessageVersion
 			+TestMessage.EV3Version
 			+TestMessage.CommandSetMDP
 			+TestMessage.BlankLine;
 	
 	//通常のメッセージ(NullCommand)
-	public static String NormalMessageNullCommand
+	public static final String NormalMessageNullCommand
 		=TestMessage.MessageVersion
 			+TestMessage.EV3Version
 			+TestMessage.CommandNullCommand
