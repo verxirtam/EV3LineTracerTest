@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import rl.linetracer.communication.CommandNullCommand;
-import rl.linetracer.communication.EV3LineTracer_1_0_Command;
 
 public class Message_1_0_BodyTest
 {
@@ -60,9 +59,9 @@ public class Message_1_0_BodyTest
 			// 出力結果を文字列として取得する
 			String out = tmc.getStringWriter().toString();
 			//想定される出力結果
-			String normalout = "MESSAGE_1.0" + "\n"
+			String normalout = Message_1_0_Body.VERSION_STRING + "\n"
 					+ CommandNullCommand.COMMAND_STRING+"\n"
-					+ EV3LineTracer_1_0_Command.RESULT_OK + "\n";
+					+ CommandNullCommand.RESULT_OK + "\n";
 			//想定される出力結果と一致しているか確認する
 			if (out.equals(normalout))
 			{

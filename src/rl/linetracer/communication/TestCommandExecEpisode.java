@@ -2,6 +2,9 @@ package rl.linetracer.communication;
 
 import rl.Episode;
 
+//テスト用のCommandExecEpisode
+//EV3の実機を制御しないようにするためにこのクラスを使用する
+//ダミーのエピソードを出力する
 public class TestCommandExecEpisode extends CommandExecEpisode
 {
 	private Episode episode;
@@ -36,6 +39,6 @@ public class TestCommandExecEpisode extends CommandExecEpisode
 	@Override
 	protected void doExecEpisode(Episode e)
 	{
-		e = new Episode(episode);
+		e.setEpisode(episode);
 	}
 }

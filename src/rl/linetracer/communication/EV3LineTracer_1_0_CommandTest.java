@@ -45,7 +45,7 @@ public class EV3LineTracer_1_0_CommandTest
 			MessageOutputContext output = tmc.getMessageOutputContext();
 
 			// 処理の実行
-			EV3LineTracer_1_0_Command m = new EV3LineTracer_1_0_Command();
+			TestEV3LineTracer_1_0_Command m = new TestEV3LineTracer_1_0_Command();
 			m.process(input, output);
 
 			// 出力結果の取得
@@ -84,7 +84,7 @@ public class EV3LineTracer_1_0_CommandTest
 	@Test
 	public final void testCreateCommand_ExecEpisode()
 	{
-
+		// TODO TestExecEpisodeの出力結果との比較を実装すること
 		String normal_output_string = CommandNullCommand.COMMAND_STRING
 				+ "\nOK\n";
 		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string);
