@@ -76,17 +76,27 @@ public class EV3LineTracer_1_0_CommandTest
 	public final void testCreateCommand_NullCommand()
 	{
 
-		String normal_output_string = CommandNullCommand.COMMAND_STRING
-				+ "\nOK\n";
+		String normal_output_string = CommandNullCommand.COMMAND_STRING + "\nOK\n";
 		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string);
 	}
 	// 正常系(ExecEpisode)
 	@Test
 	public final void testCreateCommand_ExecEpisode()
 	{
-		// TODO TestExecEpisodeの出力結果との比較を実装すること
-		String normal_output_string = CommandNullCommand.COMMAND_STRING
-				+ "\nOK\n";
+		String normal_output_string = TestCommandExecEpisode.NORMAL_OUTPUT;
 		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string);
 	}
+	// 正常系(SetMDP)
+	@Test
+	public final void testCreateCommand_SetMDP()
+	{
+		fail("未作成");
+	}
+	// 異常系(存在しないコマンド)
+	@Test
+	public final void testCreateCommand_InvalidCommand()
+	{
+		fail("未作成");
+	}
+		
 }
