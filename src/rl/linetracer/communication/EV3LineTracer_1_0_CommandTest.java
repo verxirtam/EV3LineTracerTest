@@ -34,7 +34,7 @@ public class EV3LineTracer_1_0_CommandTest
 	}
 
 	private void testCreateCommand(String input_string,
-			String normal_output_string)
+			String normal_output_string, boolean normaltest)
 	{
 		TestMessageContext tmc = null;
 		try
@@ -57,17 +57,38 @@ public class EV3LineTracer_1_0_CommandTest
 			if (output_string.equals(normal_output_string))
 			{
 				// 想定通りなら成功
-				assertTrue(true);
+				if(normaltest)
+				{
+					assertTrue(true);
+				}
+				else
+				{
+					fail();
+				}
 			} else
 			{
 				// 想定通りでないなら失敗
-				fail();
+				if(normaltest)
+				{
+					fail();
+				}
+				else
+				{
+					assertTrue(true);
+				}
 			}
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 			// 例外が発生したら失敗
-			fail();
+			if(normaltest)
+			{
+				fail();
+			}
+			else
+			{
+				assertTrue(true);
+			}
 		}
 	}
 
@@ -78,7 +99,7 @@ public class EV3LineTracer_1_0_CommandTest
 
 		String normal_output_string = CommandNullCommand.COMMAND_STRING
 				+ "\nOK\n";
-		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string);
+		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string,true);
 	}
 
 	// 正常系(ExecEpisode)
@@ -86,7 +107,7 @@ public class EV3LineTracer_1_0_CommandTest
 	public final void testCreateCommand_ExecEpisode()
 	{
 		String normal_output_string = TestCommandExecEpisode.NORMAL_OUTPUT;
-		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string);
+		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string,true);
 	}
 
 	// 正常系(SetMDP)
@@ -95,14 +116,17 @@ public class EV3LineTracer_1_0_CommandTest
 	{
 		String normal_output_string = CommandSetMDP.COMMAND_STRING + "\n"
 				+ CommandSetMDP.RESULT_OK + "\n";
-		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string);
+		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string,true);
 	}
 
 	// 異常系(存在しないコマンド)
 	@Test
 	public final void testCreateCommand_InvalidCommand()
 	{
-		fail("未作成");
+		String input_string = "AAAAAAAAAAAAA\n";
+		String normal_output_string = "\n";
+		
+		testCreateCommand(input_string, normal_output_string,false);
 	}
 
 }

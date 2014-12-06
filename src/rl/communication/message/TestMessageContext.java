@@ -2,6 +2,7 @@ package rl.communication.message;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -12,7 +13,7 @@ import rl.communication.message.context.MessageOutputContext;
 import rl.communication.message.context.TSVInputContext;
 import rl.communication.message.context.TSVOutputContext;
 
-public class TestMessageContext
+public class TestMessageContext implements Closeable
 {
 	private Reader sr;
 	private BufferedReader br;
@@ -56,6 +57,7 @@ public class TestMessageContext
 		return sw;
 	}
 	
+	@Override
 	public void close()
 	{
 		try{br.close();} catch (IOException e){}
