@@ -57,22 +57,20 @@ public class EV3LineTracer_1_0_CommandTest
 			if (output_string.equals(normal_output_string))
 			{
 				// 想定通りなら成功
-				if(normaltest)
+				if (normaltest)
 				{
 					assertTrue(true);
-				}
-				else
+				} else
 				{
 					fail();
 				}
 			} else
 			{
 				// 想定通りでないなら失敗
-				if(normaltest)
+				if (normaltest)
 				{
 					fail();
-				}
-				else
+				} else
 				{
 					assertTrue(true);
 				}
@@ -81,11 +79,10 @@ public class EV3LineTracer_1_0_CommandTest
 		{
 			e.printStackTrace();
 			// 例外が発生したら失敗
-			if(normaltest)
+			if (normaltest)
 			{
 				fail();
-			}
-			else
+			} else
 			{
 				assertTrue(true);
 			}
@@ -97,26 +94,30 @@ public class EV3LineTracer_1_0_CommandTest
 	public final void testCreateCommand_NullCommand()
 	{
 
-		String normal_output_string = CommandNullCommand.COMMAND_STRING
-				+ "\nOK\n";
-		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string,true);
+		String normal_output_string = EV3LineTracer_1_0_Command.VERSION_STRING
+				+ "\n" + CommandNullCommand.COMMAND_STRING + "\nOK\n";
+		testCreateCommand(TestMessage.CommandNullCommand, normal_output_string,
+				true);
 	}
 
 	// 正常系(ExecEpisode)
 	@Test
 	public final void testCreateCommand_ExecEpisode()
 	{
-		String normal_output_string = TestCommandExecEpisode.NORMAL_OUTPUT;
-		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string,true);
+		String normal_output_string = EV3LineTracer_1_0_Command.VERSION_STRING
+				+ "\n" + TestCommandExecEpisode.NORMAL_OUTPUT;
+		testCreateCommand(TestMessage.CommandExecEpisode, normal_output_string,
+				true);
 	}
 
 	// 正常系(SetMDP)
 	@Test
 	public final void testCreateCommand_SetMDP()
 	{
-		String normal_output_string = CommandSetMDP.COMMAND_STRING + "\n"
+		String normal_output_string = EV3LineTracer_1_0_Command.VERSION_STRING
+				+ "\n" + CommandSetMDP.COMMAND_STRING + "\n"
 				+ CommandSetMDP.RESULT_OK + "\n";
-		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string,true);
+		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string, true);
 	}
 
 	// 異常系(存在しないコマンド)
@@ -125,8 +126,8 @@ public class EV3LineTracer_1_0_CommandTest
 	{
 		String input_string = "AAAAAAAAAAAAA\n";
 		String normal_output_string = "\n";
-		
-		testCreateCommand(input_string, normal_output_string,false);
+
+		testCreateCommand(input_string, normal_output_string, false);
 	}
 
 }
