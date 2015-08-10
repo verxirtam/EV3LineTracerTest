@@ -23,23 +23,16 @@ public class TestMessageContext implements Closeable
 	private MessageInputContext mic;
 	private MessageOutputContext moc;
 
-	public TestMessageContext(String message) throws IOException
+	public TestMessageContext(String message)
 	{
 		sr= new StringReader(message);
 		br = new BufferedReader(sr);
 		sw = new StringWriter();
 		bw = new BufferedWriter(sw);
 
-		try
-		{
-			mic = new TSVInputContext(br);
-			moc = new TSVOutputContext(bw);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-			throw e;
-		}
+
+		mic = new TSVInputContext(br);
+		moc = new TSVOutputContext(bw);
 	}
 	
 	public MessageInputContext getMessageInputContext()
