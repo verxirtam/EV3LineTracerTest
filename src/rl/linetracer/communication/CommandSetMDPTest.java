@@ -65,7 +65,8 @@ public class CommandSetMDPTest
 			StringWriter sw = tmc.getStringWriter();
 			String output_string = sw.toString();
 			String normal_output_string = CommandSetMDP.COMMAND_STRING+"\n"
-					+CommandSetMDP.RESULT_OK+"\n";
+					+CommandSetMDP.RESULT_OK+"\n"
+					+TestMessage.CommandSetMDPBody;
 			if(!output_string.equals(normal_output_string))
 			{
 				fail();
@@ -116,6 +117,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception1_Interval()
 	{
 		String message="13\t123\n"
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl
@@ -127,6 +129,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception2_StateCount()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+"10\tAAA\n"
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl
@@ -138,6 +141,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception3_State1()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+"0	0.1	1\n"
 				+"1	0.2	2\n"
@@ -158,6 +162,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception3_State2()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+"0	0.1	1\n"
 				+"1	0.2	2\n"
@@ -178,6 +183,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception3_State3()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+"0	0.1	1\n"
 				+"1	0.2	2\n"
@@ -198,6 +204,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception3_State4()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+"0	0.1	1\n"
 				+"1	0.2	2\n"
@@ -218,6 +225,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception4_Control1()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+"0	10	10\n"
@@ -247,6 +255,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception4_Control2()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+"0	10	10\n"
@@ -277,6 +286,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception4_Control3()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+"0	10	10\n"
@@ -306,6 +316,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception4_Control4()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+"0	10	10\n"
@@ -335,6 +346,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception4_Control5()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+"0	10	10\n"
@@ -364,6 +376,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception5_RegularPolicy1()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl
@@ -385,6 +398,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception5_RegularPolicy2()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl
@@ -405,6 +419,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception5_RegularPolicy3()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl
@@ -425,6 +440,7 @@ public class CommandSetMDPTest
 	public void testProcess_Exception5_RegularPolicy4()
 	{
 		String message=TestMessage.CommandSetMDPBodyInterval
+				+TestMessage.CommandSetMDPBodyCostMax
 				+TestMessage.CommandSetMDPBodyStateCount
 				+TestMessage.CommandSetMDPBodyState
 				+TestMessage.CommandSetMDPBodyControl

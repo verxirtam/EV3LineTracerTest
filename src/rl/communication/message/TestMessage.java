@@ -21,6 +21,7 @@ public class TestMessage
 	
 	public static final String CommandSetMDPBody;
 	public static final String CommandSetMDPBodyInterval;
+	public static final String CommandSetMDPBodyCostMax;
 	public static final String CommandSetMDPBodyStateCount;
 	public static final String CommandSetMDPBodyState;
 	public static final String CommandSetMDPBodyControl;
@@ -34,6 +35,7 @@ public class TestMessage
 		DefaultMDPParameter mdpp = CommandSetMDPParameter;
 		
 		mdpp.interval=11;
+		mdpp.costMax=600.0;
 		mdpp.stateCount=10;
 		mdpp.states.add(new State(0.1,1));
 		mdpp.states.add(new State(0.2,2));
@@ -74,6 +76,7 @@ public class TestMessage
 		
 		
 		CommandSetMDPBodyInterval=""+mdpp.interval+"\n";
+		CommandSetMDPBodyCostMax=""+mdpp.costMax+"\n";
 		CommandSetMDPBodyStateCount=""+mdpp.stateCount+"\n";
 		
 		
@@ -109,6 +112,7 @@ public class TestMessage
 		CommandSetMDPBodyRegularPolicy=regularPolicy;
 		
 		CommandSetMDPBody=CommandSetMDPBodyInterval
+				+CommandSetMDPBodyCostMax
 				+CommandSetMDPBodyStateCount
 				+CommandSetMDPBodyState
 				+CommandSetMDPBodyControl

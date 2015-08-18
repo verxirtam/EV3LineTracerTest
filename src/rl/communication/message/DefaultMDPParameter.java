@@ -8,6 +8,7 @@ import rl.linetracer.State;
 public class DefaultMDPParameter
 {
 	public int interval;
+	public double costMax;	
 	public int stateCount;
 	public ArrayList<State> states;
 	public ArrayList<ArrayList<Control>> controls;
