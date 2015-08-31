@@ -13,6 +13,7 @@ public class DefaultMDPParameter
 	public ArrayList<State> states;
 	public ArrayList<ArrayList<Control>> controls;
 	public int[] regularPolicy;
+	public ArrayList<ArrayList<Double>> currentPolicy;
 	public DefaultMDPParameter()
 	{
 		states = new ArrayList<State>();

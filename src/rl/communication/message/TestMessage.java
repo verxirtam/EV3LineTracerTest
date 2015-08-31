@@ -17,7 +17,7 @@ public class TestMessage
 
 
 
-	public static final DefaultMDPParameter CommandSetMDPParameter;
+	public static final DefaultMDPParameter DefaultSetMDPParameter;
 	
 	public static final String CommandSetMDPBody;
 	public static final String CommandSetMDPBodyInterval;
@@ -26,13 +26,15 @@ public class TestMessage
 	public static final String CommandSetMDPBodyState;
 	public static final String CommandSetMDPBodyControl;
 	public static final String CommandSetMDPBodyRegularPolicy;
+	
+	public static final String CommandSetCurrentPolicyBody;
 
 	
 	static
 	{
-		CommandSetMDPParameter = new DefaultMDPParameter();
+		DefaultSetMDPParameter = new DefaultMDPParameter();
 		
-		DefaultMDPParameter mdpp = CommandSetMDPParameter;
+		DefaultMDPParameter mdpp = DefaultSetMDPParameter;
 		
 		mdpp.interval=11;
 		mdpp.costMax=600.0;
@@ -74,7 +76,21 @@ public class TestMessage
 		
 		mdpp.regularPolicy = new int[]{0,1,1,0,0,1,1,0,1,1};
 		
-		
+		for(int i=0;i<10;i++)
+		{
+			mdpp.currentPolicy.add(new ArrayList<Double>());
+		}
+		mdpp.currentPolicy.get(0).add(1.0);
+		mdpp.currentPolicy.get(1).add(0.0);mdpp.currentPolicy.get(1).add(1.0);
+		mdpp.currentPolicy.get(2).add(0.0);mdpp.currentPolicy.get(2).add(1.0);
+		mdpp.currentPolicy.get(3).add(1.0);mdpp.currentPolicy.get(3).add(0.0);
+		mdpp.currentPolicy.get(4).add(1.0);mdpp.currentPolicy.get(4).add(0.0);
+		mdpp.currentPolicy.get(5).add(0.0);mdpp.currentPolicy.get(5).add(1.0);
+		mdpp.currentPolicy.get(6).add(0.0);mdpp.currentPolicy.get(6).add(1.0);
+		mdpp.currentPolicy.get(7).add(1.0);mdpp.currentPolicy.get(7).add(0.0);
+		mdpp.currentPolicy.get(8).add(0.0);mdpp.currentPolicy.get(8).add(1.0);
+		mdpp.currentPolicy.get(9).add(0.0);mdpp.currentPolicy.get(9).add(1.0);
+
 		CommandSetMDPBodyInterval=""+mdpp.interval+"\n";
 		CommandSetMDPBodyCostMax=""+mdpp.costMax+"\n";
 		CommandSetMDPBodyStateCount=""+mdpp.stateCount+"\n";
@@ -118,6 +134,18 @@ public class TestMessage
 				+CommandSetMDPBodyControl
 				+CommandSetMDPBodyRegularPolicy;
 		
+		String currentPolicy="";
+		for (int i = 0; i < mdpp.stateCount; i++)
+		{
+			currentPolicy += "" + i;
+			int control_count = mdpp.currentPolicy.get(i).size();
+			for(int u = 0; u < control_count; u++)
+			{
+				currentPolicy += "\t" + mdpp.currentPolicy.get(i).get(u);
+			}
+			currentPolicy += "\n";
+		}
+		CommandSetCurrentPolicyBody=currentPolicy;
 	}
 	
 	
@@ -152,5 +180,11 @@ public class TestMessage
 			+TestMessage.EV3Version
 			+TestMessage.CommandNullCommand
 			+TestMessage.BlankLine;
-		
+	
+	//通常のメッセージ(SetCurrentPolicy)
+	public static final String NormalMessageSetCurrentPolicy
+		=TestMessage.MessageVersion
+			+TestMessage.EV3Version
+			+TestMessage.CommandSetCurrentPolicyBody
+			+TestMessage.BlankLine;
 }

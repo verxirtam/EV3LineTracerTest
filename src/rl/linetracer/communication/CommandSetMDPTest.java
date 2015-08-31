@@ -73,7 +73,7 @@ public class CommandSetMDPTest
 			}
 			
 			EV3LineTracer ev3 = EV3LineTracer.getInstance();
-			DefaultMDPParameter mdpp=TestMessage.CommandSetMDPParameter;
+			DefaultMDPParameter mdpp=TestMessage.DefaultSetMDPParameter;
 			assertEquals(ev3.GetInterval(),mdpp.interval);
 			assertEquals(ev3.GetStateCount(),mdpp.stateCount);
 			
