@@ -18,5 +18,6 @@ public class DefaultMDPParameter
 	{
 		states = new ArrayList<State>();
 		controls = new ArrayList<ArrayList<Control>>();
+		currentPolicy = new ArrayList<ArrayList<Double>>();
 	}
 }
