@@ -19,7 +19,9 @@ public class EV3LineTracer_1_0_CommandTest
 	@Before
 	public void setUp() throws Exception
 	{
-
+		//EV3を初期化するため下記を実行
+		CommandSetMDPTest setmdp = new CommandSetMDPTest();
+		setmdp.testProcess();
 	}
 
 	@After
@@ -116,8 +118,20 @@ public class EV3LineTracer_1_0_CommandTest
 	{
 		String normal_output_string = EV3LineTracer_1_0_Command.VERSION_STRING
 				+ "\n" + CommandSetMDP.COMMAND_STRING + "\n"
-				+ CommandSetMDP.RESULT_OK + "\n";
+				+ CommandSetMDP.RESULT_OK + "\n"
+				+ TestMessage.CommandSetMDPBody;
 		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string, true);
+	}
+	
+	// 正常系(SetCurrentPolicy)
+	@Test
+	public final void testCreateCommand_SetCurrentPolicy()
+	{
+		String normal_output_string = EV3LineTracer_1_0_Command.VERSION_STRING
+				+ "\n" + CommandSetCurrentPolicy.COMMAND_STRING + "\n"
+				+ CommandSetCurrentPolicy.RESULT_OK + "\n"
+				+ TestMessage.CommandSetCurrentPolicyBody;
+		testCreateCommand(TestMessage.CommandSetCurrentPolicy, normal_output_string, true);
 	}
 
 	// 異常系(存在しないコマンド)

@@ -154,6 +154,11 @@ public class TestMessage
 			rl.linetracer.communication.CommandSetMDP.COMMAND_STRING + "\n"
 			+CommandSetMDPBody;
 
+	//コマンド(SetMDP)
+	public static final String CommandSetCurrentPolicy =
+			rl.linetracer.communication.CommandSetCurrentPolicy.COMMAND_STRING + "\n"
+			+CommandSetCurrentPolicyBody;
+
 	// コマンド(ExecEpisode)
 	public static final String CommandExecEpisode = 
 			rl.linetracer.communication.CommandExecEpisode.COMMAND_STRING

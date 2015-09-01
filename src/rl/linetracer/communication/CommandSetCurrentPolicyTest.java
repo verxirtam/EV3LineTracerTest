@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import rl.StochasticPolicy;
-import rl.communication.message.CommandSetCurrentPolicy;
 import rl.communication.message.DefaultMDPParameter;
 import rl.communication.message.TestMessage;
 import rl.communication.message.TestMessageContext;
@@ -25,6 +24,9 @@ public class CommandSetCurrentPolicyTest
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{
+		//EV3を初期化するため下記を実行
+		CommandSetMDPTest setmdp = new CommandSetMDPTest();
+		setmdp.testProcess();
 	}
 
 	@AfterClass
