@@ -18,6 +18,7 @@ import rl.communication.message.context.MessageInputContext;
 import rl.communication.message.context.MessageOutputContext;
 import rl.linetracer.Control;
 import rl.linetracer.EV3LineTracer;
+import rl.linetracer.MDPManagerRefmax;
 
 public class CommandSetMDPTest
 {
@@ -47,7 +48,7 @@ public class CommandSetMDPTest
 	{
 		CommandSetMDP com = null;
 		
-		com = new CommandSetMDP();
+		com = new CommandSetMDP(EV3LineTracer_1_0_Command.VERSION_STRING);
 		String message=TestMessage.CommandSetMDPBody;
 		
 		
@@ -73,20 +74,21 @@ public class CommandSetMDPTest
 			}
 			
 			EV3LineTracer ev3 = EV3LineTracer.getInstance();
+			MDPManagerRefmax mdp_manager = (MDPManagerRefmax)(ev3.getMDPManager());
 			DefaultMDPParameter mdpp=TestMessage.DefaultSetMDPParameter;
-			assertEquals(ev3.GetInterval(),mdpp.interval);
-			assertEquals(ev3.GetStateCount(),mdpp.stateCount);
+			assertEquals(mdp_manager.getInterval(),mdpp.interval);
+			assertEquals(mdp_manager.getStateCount(),mdpp.stateCount);
 			
 			StochasticPolicy ev3_regularpolicy = ev3.GetRegularPolicy();
 			int[] mdpp_regularpolicy = mdpp.regularPolicy;
 			
-			for(int i=0; i < ev3.GetStateCount();i++)
+			for(int i=0; i < mdp_manager.getStateCount();i++)
 			{
-				assertEquals(ev3.GetState(i).RefMax,mdpp.states.get(i).RefMax,0.001);
-				assertEquals(ev3.GetState(i).ControlCount,mdpp.states.get(i).ControlCount);
-				for(int u=0;u<ev3.GetState(i).ControlCount;u++)
+				assertEquals(mdp_manager.getState(i).RefMax,mdpp.states.get(i).RefMax,0.001);
+				assertEquals(mdp_manager.getState(i).ControlCount,mdpp.states.get(i).ControlCount);
+				for(int u=0;u<mdp_manager.getState(i).ControlCount;u++)
 				{
-					Control ev3_control = ev3.GetControl(i,u);
+					Control ev3_control = mdp_manager.getControl(i,u);
 					Control mdpp_control = mdpp.controls.get(i).get(u);
 					assertEquals(ev3_control.LMotorSpeed,mdpp_control.LMotorSpeed);
 					assertEquals(ev3_control.RMotorSpeed,mdpp_control.RMotorSpeed);
@@ -462,7 +464,7 @@ public class CommandSetMDPTest
 		try (TestMessageContext tmc = new TestMessageContext(message))
 		{
 			CommandSetMDP com = null;
-			com = new CommandSetMDP();
+			com = new CommandSetMDP(EV3LineTracer_1_0_Command.VERSION_STRING);
 			
 			MessageInputContext input = tmc.getMessageInputContext();
 			MessageOutputContext output = tmc.getMessageOutputContext();
