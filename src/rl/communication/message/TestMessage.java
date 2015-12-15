@@ -15,6 +15,9 @@ public class TestMessage
 	//EV3のバージョン
 	public static final String EV3Version = 
 			EV3LineTracer_1_0_Command.VERSION_STRING + "\n";
+	//EV3のバージョン(1.1用)
+	public static final String EV3Version_1_1 = 
+			EV3LineTracer_1_1_Command.VERSION_STRING + "\n";
 
 
 

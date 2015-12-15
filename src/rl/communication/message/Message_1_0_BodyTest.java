@@ -12,6 +12,7 @@ import rl.linetracer.communication.EV3LineTracer_1_0_Command;
 public class Message_1_0_BodyTest
 {
 	String normalMessage;
+	String normalMessage_1_1;
 	String invalidEV3VersionMessage;
 	String invalidEV3VersionMessage2;
 
@@ -20,6 +21,10 @@ public class Message_1_0_BodyTest
 	{
 		normalMessage = 
 				TestMessage.EV3Version 
+				+ TestMessage.CommandNullCommand
+				+ TestMessage.BlankLine;
+		normalMessage_1_1 = 
+				TestMessage.EV3Version_1_1 
 				+ TestMessage.CommandNullCommand
 				+ TestMessage.BlankLine;
 		invalidEV3VersionMessage = 
@@ -62,6 +67,48 @@ public class Message_1_0_BodyTest
 			//想定される出力結果
 			String normalout = Message_1_0_Body.VERSION_STRING + "\n"
 					+ EV3LineTracer_1_0_Command.VERSION_STRING + "\n"
+					+ CommandNullCommand.COMMAND_STRING+"\n"
+					+ CommandNullCommand.RESULT_OK + "\n";
+			//想定される出力結果と一致しているか確認する
+			if (out.equals(normalout))
+			{
+				assertTrue(true);
+			} else
+			{
+				fail();
+			}
+		} catch (Exception e)
+		{
+			//例外が発生したら失敗
+			e.printStackTrace();
+			fail();
+		}
+		finally
+		{
+			tmc.close();
+		}
+	}
+	// 正常系(EV3LineTracer1.1向け)
+	@Test
+	public void testProcess2()
+	{
+		TestMessageContext tmc = null;
+		try
+		{
+			tmc = new TestMessageContext(normalMessage);
+			Message_1_0_Body m = new Message_1_0_Body();
+
+			m.process(tmc.getMessageInputContext(),
+					tmc.getMessageOutputContext());
+
+			//出力結果が正しいことを確認する
+			//出力バッファの内容を書き出す
+			tmc.getMessageOutputContext().flush();
+			// 出力結果を文字列として取得する
+			String out = tmc.getStringWriter().toString();
+			//想定される出力結果
+			String normalout = Message_1_0_Body.VERSION_STRING + "\n"
+					+ EV3LineTracer_1_1_Command.VERSION_STRING + "\n"
 					+ CommandNullCommand.COMMAND_STRING+"\n"
 					+ CommandNullCommand.RESULT_OK + "\n";
 			//想定される出力結果と一致しているか確認する
