@@ -2,7 +2,7 @@ package rl.communication.message;
 
 import java.util.ArrayList;
 
-import rl.linetracer.Control;
+import rl.linetracer.ControlNormal;
 import rl.linetracer.State;
 
 public class DefaultMDPParameter
@@ -11,13 +11,13 @@ public class DefaultMDPParameter
 	public double costMax;	
 	public int stateCount;
 	public ArrayList<State> states;
-	public ArrayList<ArrayList<Control>> controls;
+	public ArrayList<ArrayList<ControlNormal>> controls;
 	public int[] regularPolicy;
 	public ArrayList<ArrayList<Double>> currentPolicy;
 	public DefaultMDPParameter()
 	{
 		states = new ArrayList<State>();
-		controls = new ArrayList<ArrayList<Control>>();
+		controls = new ArrayList<ArrayList<ControlNormal>>();
 		currentPolicy = new ArrayList<ArrayList<Double>>();
 	}
 }

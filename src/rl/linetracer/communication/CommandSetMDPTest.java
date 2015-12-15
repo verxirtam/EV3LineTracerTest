@@ -16,7 +16,7 @@ import rl.communication.message.TestMessage;
 import rl.communication.message.TestMessageContext;
 import rl.communication.message.context.MessageInputContext;
 import rl.communication.message.context.MessageOutputContext;
-import rl.linetracer.Control;
+import rl.linetracer.ControlNormal;
 import rl.linetracer.EV3LineTracer;
 import rl.linetracer.MDPManagerRefmax;
 import rl.linetracer.StateRefMax;
@@ -89,8 +89,8 @@ public class CommandSetMDPTest
 				assertEquals(mdp_manager.getState(i).ControlCount,mdpp.states.get(i).ControlCount);
 				for(int u=0;u<mdp_manager.getState(i).ControlCount;u++)
 				{
-					Control ev3_control = mdp_manager.getControl(i,u);
-					Control mdpp_control = mdpp.controls.get(i).get(u);
+					ControlNormal ev3_control = (ControlNormal) mdp_manager.getControl(i,u);
+					ControlNormal mdpp_control = mdpp.controls.get(i).get(u);
 					assertEquals(ev3_control.LMotorSpeed,mdpp_control.LMotorSpeed);
 					assertEquals(ev3_control.RMotorSpeed,mdpp_control.RMotorSpeed);
 					

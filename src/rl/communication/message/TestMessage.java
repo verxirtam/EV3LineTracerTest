@@ -2,7 +2,7 @@ package rl.communication.message;
 
 import java.util.ArrayList;
 
-import rl.linetracer.Control;
+import rl.linetracer.ControlNormal;
 import rl.linetracer.State;
 import rl.linetracer.StateRefMax;
 import rl.linetracer.communication.EV3LineTracer_1_0_Command;
@@ -53,27 +53,27 @@ public class TestMessage
 		
 		for(int i=0;i<10;i++)
 		{
-			mdpp.controls.add(new ArrayList<Control>());
+			mdpp.controls.add(new ArrayList<ControlNormal>());
 		}
-		mdpp.controls.get(0).add(new Control(10,10));
-		mdpp.controls.get(1).add(new Control(10, 5));
-		mdpp.controls.get(1).add(new Control( 5,10));
-		mdpp.controls.get(2).add(new Control(10, 5));
-		mdpp.controls.get(2).add(new Control( 5,10));
-		mdpp.controls.get(3).add(new Control(10, 5));
-		mdpp.controls.get(3).add(new Control( 5,10));
-		mdpp.controls.get(4).add(new Control(10, 5));
-		mdpp.controls.get(4).add(new Control( 5,10));
-		mdpp.controls.get(5).add(new Control(10, 5));
-		mdpp.controls.get(5).add(new Control( 5,10));
-		mdpp.controls.get(6).add(new Control(10, 5));
-		mdpp.controls.get(6).add(new Control( 5,10));
-		mdpp.controls.get(7).add(new Control(10, 5));
-		mdpp.controls.get(7).add(new Control( 5,10));
-		mdpp.controls.get(8).add(new Control(10, 5));
-		mdpp.controls.get(8).add(new Control( 5,10));
-		mdpp.controls.get(9).add(new Control(10, 5));
-		mdpp.controls.get(9).add(new Control( 5,10));
+		mdpp.controls.get(0).add(new ControlNormal(10,10));
+		mdpp.controls.get(1).add(new ControlNormal(10, 5));
+		mdpp.controls.get(1).add(new ControlNormal( 5,10));
+		mdpp.controls.get(2).add(new ControlNormal(10, 5));
+		mdpp.controls.get(2).add(new ControlNormal( 5,10));
+		mdpp.controls.get(3).add(new ControlNormal(10, 5));
+		mdpp.controls.get(3).add(new ControlNormal( 5,10));
+		mdpp.controls.get(4).add(new ControlNormal(10, 5));
+		mdpp.controls.get(4).add(new ControlNormal( 5,10));
+		mdpp.controls.get(5).add(new ControlNormal(10, 5));
+		mdpp.controls.get(5).add(new ControlNormal( 5,10));
+		mdpp.controls.get(6).add(new ControlNormal(10, 5));
+		mdpp.controls.get(6).add(new ControlNormal( 5,10));
+		mdpp.controls.get(7).add(new ControlNormal(10, 5));
+		mdpp.controls.get(7).add(new ControlNormal( 5,10));
+		mdpp.controls.get(8).add(new ControlNormal(10, 5));
+		mdpp.controls.get(8).add(new ControlNormal( 5,10));
+		mdpp.controls.get(9).add(new ControlNormal(10, 5));
+		mdpp.controls.get(9).add(new ControlNormal( 5,10));
 		
 		mdpp.regularPolicy = new int[]{0,1,1,0,0,1,1,0,1,1};
 		
@@ -113,7 +113,7 @@ public class TestMessage
 
 			for (int u = 0; u < s.ControlCount; u++)
 			{
-				Control c = mdpp.controls.get(i).get(u);
+				ControlNormal c = mdpp.controls.get(i).get(u);
 				controls += "" + i + "\t" + u + "\t" + c.LMotorSpeed + "\t"
 						+ c.RMotorSpeed + "\n";
 			}
