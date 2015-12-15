@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import rl.linetracer.Control;
 import rl.linetracer.State;
+import rl.linetracer.StateRefMax;
 import rl.linetracer.communication.EV3LineTracer_1_0_Command;
 
 public class TestMessage
@@ -39,16 +40,16 @@ public class TestMessage
 		mdpp.interval=11;
 		mdpp.costMax=600.0;
 		mdpp.stateCount=10;
-		mdpp.states.add(new State(0.1,1));
-		mdpp.states.add(new State(0.2,2));
-		mdpp.states.add(new State(0.3,2));
-		mdpp.states.add(new State(0.4,2));
-		mdpp.states.add(new State(0.5,2));
-		mdpp.states.add(new State(0.6,2));
-		mdpp.states.add(new State(0.7,2));
-		mdpp.states.add(new State(0.8,2));
-		mdpp.states.add(new State(0.9,2));
-		mdpp.states.add(new State(1.0,2));
+		mdpp.states.add(new StateRefMax(0.1,1));
+		mdpp.states.add(new StateRefMax(0.2,2));
+		mdpp.states.add(new StateRefMax(0.3,2));
+		mdpp.states.add(new StateRefMax(0.4,2));
+		mdpp.states.add(new StateRefMax(0.5,2));
+		mdpp.states.add(new StateRefMax(0.6,2));
+		mdpp.states.add(new StateRefMax(0.7,2));
+		mdpp.states.add(new StateRefMax(0.8,2));
+		mdpp.states.add(new StateRefMax(0.9,2));
+		mdpp.states.add(new StateRefMax(1.0,2));
 		
 		for(int i=0;i<10;i++)
 		{
@@ -100,7 +101,7 @@ public class TestMessage
 		for (int i = 0; i < mdpp.stateCount; i++)
 		{
 			State s = mdpp.states.get(i);
-			states += "" + i + "\t" + s.RefMax + "\t" + s.ControlCount + "\n";
+			states += "" + i + "\t" + ((StateRefMax)s).RefMax + "\t" + s.ControlCount + "\n";
 			
 		}
 		CommandSetMDPBodyState=states;

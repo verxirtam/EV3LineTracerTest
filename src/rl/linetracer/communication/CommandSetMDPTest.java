@@ -19,6 +19,7 @@ import rl.communication.message.context.MessageOutputContext;
 import rl.linetracer.Control;
 import rl.linetracer.EV3LineTracer;
 import rl.linetracer.MDPManagerRefmax;
+import rl.linetracer.StateRefMax;
 
 public class CommandSetMDPTest
 {
@@ -84,7 +85,7 @@ public class CommandSetMDPTest
 			
 			for(int i=0; i < mdp_manager.getStateCount();i++)
 			{
-				assertEquals(mdp_manager.getState(i).RefMax,mdpp.states.get(i).RefMax,0.001);
+				assertEquals(((StateRefMax)mdp_manager.getState(i)).RefMax,((StateRefMax)mdpp.states.get(i)).RefMax,0.001);
 				assertEquals(mdp_manager.getState(i).ControlCount,mdpp.states.get(i).ControlCount);
 				for(int u=0;u<mdp_manager.getState(i).ControlCount;u++)
 				{
