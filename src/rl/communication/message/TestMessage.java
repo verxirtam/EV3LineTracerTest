@@ -6,6 +6,7 @@ import rl.linetracer.ControlNormal;
 import rl.linetracer.State;
 import rl.linetracer.StateRefMax;
 import rl.linetracer.communication.EV3LineTracer_1_0_Command;
+import rl.linetracer.communication.EV3LineTracer_1_1_Command;
 
 public class TestMessage
 {

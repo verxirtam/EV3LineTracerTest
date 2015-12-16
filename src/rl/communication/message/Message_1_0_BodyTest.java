@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import rl.linetracer.communication.CommandNullCommand;
 import rl.linetracer.communication.EV3LineTracer_1_0_Command;
+import rl.linetracer.communication.EV3LineTracer_1_1_Command;
 
 public class Message_1_0_BodyTest
 {
