@@ -12,6 +12,7 @@ import rl.communication.message.TestMessage;
 import rl.communication.message.TestMessageContext;
 import rl.communication.message.context.MessageInputContext;
 import rl.communication.message.context.MessageOutputContext;
+import rl.linetracer.MDPManagerRefmax;
 
 public class EV3LineTracer_1_1_CommandTest
 {
@@ -107,10 +108,11 @@ public class EV3LineTracer_1_1_CommandTest
 	public final void testCreateCommand_SetMDP()
 	{
 		String normal_output_string = EV3LineTracer_1_1_Command.VERSION_STRING
-				+ "\n" + CommandSetMDP.COMMAND_STRING + "\n"
-				+ CommandSetMDP.RESULT_OK + "\n"
+				+ "\n" + CommandSetMDP_1_1.COMMAND_STRING + "\n"
+				+ CommandSetMDP_1_1.RESULT_OK + "\n"
+				+ MDPManagerRefmax.MANAGER_NAME + "\n"
 				+ TestMessage.CommandSetMDPBody;
-		testCreateCommand(TestMessage.CommandSetMDP, normal_output_string, true);
+		testCreateCommand(TestMessage.CommandSetMDP_1_1, normal_output_string, true);
 	}
 	
 

@@ -3,6 +3,7 @@ package rl.communication.message;
 import java.util.ArrayList;
 
 import rl.linetracer.ControlNormal;
+import rl.linetracer.MDPManagerRefmax;
 import rl.linetracer.State;
 import rl.linetracer.StateRefMax;
 import rl.linetracer.communication.EV3LineTracer_1_0_Command;
@@ -157,12 +158,18 @@ public class TestMessage
 	//コマンド(SetMDP)
 	public static final String CommandSetMDP =
 			rl.linetracer.communication.CommandSetMDP.COMMAND_STRING + "\n"
-			+CommandSetMDPBody;
+			+ CommandSetMDPBody;
 
-	//コマンド(SetMDP)
+	//コマンド(SetMDP_1_1)
+	public static final String CommandSetMDP_1_1 =
+			rl.linetracer.communication.CommandSetMDP.COMMAND_STRING + "\n"
+			+ MDPManagerRefmax.MANAGER_NAME + "\n"
+			+ CommandSetMDPBody;
+
+	//コマンド(SetCurrentPolicy)
 	public static final String CommandSetCurrentPolicy =
 			rl.linetracer.communication.CommandSetCurrentPolicy.COMMAND_STRING + "\n"
-			+CommandSetCurrentPolicyBody;
+			+ CommandSetCurrentPolicyBody;
 
 	// コマンド(ExecEpisode)
 	public static final String CommandExecEpisode = 

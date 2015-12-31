@@ -49,7 +49,7 @@ public class CommandSetMDPTest
 	{
 		CommandSetMDP com = null;
 		
-		com = new CommandSetMDP(EV3LineTracer_1_0_Command.VERSION_STRING);
+		com = new CommandSetMDP();
 		String message=TestMessage.CommandSetMDPBody;
 		
 		
@@ -465,7 +465,7 @@ public class CommandSetMDPTest
 		try (TestMessageContext tmc = new TestMessageContext(message))
 		{
 			CommandSetMDP com = null;
-			com = new CommandSetMDP(EV3LineTracer_1_0_Command.VERSION_STRING);
+			com = new CommandSetMDP();
 			
 			MessageInputContext input = tmc.getMessageInputContext();
 			MessageOutputContext output = tmc.getMessageOutputContext();

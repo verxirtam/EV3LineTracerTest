@@ -96,7 +96,7 @@ public class Message_1_0_BodyTest
 		TestMessageContext tmc = null;
 		try
 		{
-			tmc = new TestMessageContext(normalMessage);
+			tmc = new TestMessageContext(normalMessage_1_1);
 			Message_1_0_Body m = new Message_1_0_Body();
 
 			m.process(tmc.getMessageInputContext(),
